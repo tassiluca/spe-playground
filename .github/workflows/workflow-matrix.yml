@@ -1,0 +1,45 @@
+name: A Matrix Workflow
+on:
+  push:
+    tags: '*'
+    branches-ignore:
+      - 'autodelivery**'
+      - 'bump**'
+      - 'renovate**'
+    paths-ignore:
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  Build:
+    strategy:
+      matrix:
+        os: [windows, macos, ubuntu]
+        # Arbitrarily-made and arbitrarily-valued variables
+        jvm_version: [8, 11, 15, 16]
+        ruby_version: [2.7, 3.0]
+        python_version: [3.7, 3.9.7]
+    # The string is computed interpolating a variable value
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: ${{ matrix.jvm_version }}
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python_version }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+      - shell: bash
+        run: java --version
+      - shell: bash
+        run: ruby --version
+      - shell: bash
+        run: python --version
