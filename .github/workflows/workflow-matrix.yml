@@ -4,14 +4,14 @@ on:
     tags: '*'
     branches-ignore:
       - 'autodelivery**'
-      - 'bump**'
-      - 'renovate**'
-    paths-ignore:
+      - 'bump-**'
+      - 'renovate/**'
+    paths-ignore: 
       - 'README.md'
       - 'CHANGELOG.md'
       - 'LICENSE'
   pull_request:
-    branches:
+    branches: 
       - master
   workflow_dispatch:
 
@@ -20,25 +20,23 @@ jobs:
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
-        # Arbitrarily-made and arbitrarily-valued variables
-        jvm_version: [8, 11, 15, 16]
+        jvm_version: [8, 11, 15, 16] # Arbitrarily-made and arbitrarily-valued variables
         ruby_version: [2.7, 3.0]
         python_version: [3.7, 3.9.7]
-    # The string is computed interpolating a variable value
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}-latest # The string is computed interpolating a variable value
     steps:
       - uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
-          java-version: ${{ matrix.jvm_version }}
+          java-version: ${{ matrix.jvm_version }} # "${{ }}" contents are interpreted by the github actions runner
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python_version }}
+          python-version: ${{ matrix.python_version }} 
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
       - shell: bash
-        run: java --version
+        run: java -version
       - shell: bash
         run: ruby --version
       - shell: bash
