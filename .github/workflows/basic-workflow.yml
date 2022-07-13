@@ -1,0 +1,68 @@
+name: Basic workflow
+on: # Events that trigger the workflow
+    push:
+        tags: '*':
+            branches-ignore: # pushes on these branches won't start a build
+                - 'autodelivery**'
+                - 'bump-**'
+                - 'renovate-**'
+            paths-ignore: # pushes that change only these files won't start the workflow
+                - 'README.md'
+                - 'CHANGELOG.md'
+                - 'LICENSE'
+    pull-request:
+        branches: # only pull requests based on these branches will start the wokflow
+            - master
+    workflow_dispatch: # allows you to run this workflows manually from the Actions tab
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # this workflow contains a single job called "Basic-Example"
+    Basic-Example:
+      # the type of runner that the job will run on
+      runs-on: macos-latest
+      # steps represents a sequence of actions that will be executed as part of the job
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+        - name: Run a one-line script
+          run: echo Hello from a ${{ runner.os }} machine!
+        - name: RUn a multi-line script
+          run: |
+            echo Add other actions to build,
+            echo test, and deploy your project 
+    Explore-GitHub-Actions:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+        - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+        - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+        - name: Check out repository code
+          uses: actions/checkout@v3
+        - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+        - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+        - name: List files in the repository
+          run: ls ${{ github.workspace }}
+        - run: echo "🍏 This job's status is ${{ job.status }}."
+        # Steps can be executed conditionally
+        - name: Skipped conditional step
+          if: runner.os == 'Windows'
+          run: echo this step won't run, it has been excluded!
+        - run: |
+            echo This is
+            echo a multi-line
+            echo script.
+    Conclusion:
+      runs-on: windows-latest
+      # Jobs may require other jobs
+      needs: [ Default-Example, Explore-GitHub-Actions ]
+      # Typically, steps that follow failed steps won't execute.
+      # However, this behavior can be changed by using the built-in function "always()"
+      if: always()
+      steps:
+        - name: Run something on powershell
+          run: echo By default, ${{ runner.os }} runners execute with powershell
+        - name: Run something on bash
+          shell: bash # on windows is necessary!
+          run: echo However, it is allowed to force the shell type and there is a bash available for ${{ runner.os }} too.
+
