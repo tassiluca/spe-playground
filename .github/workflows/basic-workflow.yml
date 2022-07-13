@@ -1,19 +1,19 @@
 name: Basic workflow
 on: # Events that trigger the workflow
-    push:
-        tags: '*':
-            branches-ignore: # pushes on these branches won't start a build
-                - 'autodelivery**'
-                - 'bump-**'
-                - 'renovate-**'
-            paths-ignore: # pushes that change only these files won't start the workflow
-                - 'README.md'
-                - 'CHANGELOG.md'
-                - 'LICENSE'
-    pull-request:
-        branches: # only pull requests based on these branches will start the wokflow
-            - master
-    workflow_dispatch: # allows you to run this workflows manually from the Actions tab
+  push:
+    tags: '*':
+    branches-ignore: # pushes on these branches won't start a build
+      - 'autodelivery**'
+      - 'bump-**'
+      - 'renovate-**'
+    paths-ignore: # pushes that change only these files won't start the workflow
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  pull-request:
+    branches: # only pull requests based on these branches will start the wokflow
+      - master
+  workflow_dispatch: # allows you to run this workflows manually from the Actions tab
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
