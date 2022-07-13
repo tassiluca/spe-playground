@@ -11,7 +11,7 @@ on: # Events that trigger the workflow
       - 'README.md'
       - 'CHANGELOG.md'
       - 'LICENSE'
-  pull-request:
+  pull_request:
     branches: # only pull requests based on these branches will start the wokflow
       - master
   workflow_dispatch: # allows you to run this workflows manually from the Actions tab
