@@ -1,7 +1,8 @@
 name: Basic workflow
+
 on: # Events that trigger the workflow
   push:
-    tags: '*':
+    tags: '*'
     branches-ignore: # pushes on these branches won't start a build
       - 'autodelivery**'
       - 'bump-**'
