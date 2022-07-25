@@ -1,4 +1,4 @@
-# This is a test using mermeid.js
+# This is a test using mermaid.js
 
 ```mermaid
 classDiagram
