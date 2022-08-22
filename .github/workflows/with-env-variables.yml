@@ -18,7 +18,7 @@ on: # Events that trigger the workflow
 
 # for more details see (GitHub tutorial)[https://docs.github.com/en/actions/learn-github-actions/environment-variables]
 env:
-  ENV_VARIABLE: Hello World
+  ENV_VARIABLE: ${{ secrets.SAMPLE_TOKEN }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
