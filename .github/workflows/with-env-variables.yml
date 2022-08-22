@@ -1,0 +1,30 @@
+name: with-env-variables
+
+on: # Events that trigger the workflow
+  push:
+    tags: '*'
+    branches-ignore: # pushes on these branches won't start a build
+      - 'autodelivery**'
+      - 'bump-**'
+      - 'renovate-**'
+    paths-ignore: # pushes that change only these files won't start the workflow
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  pull_request:
+    branches: # only pull requests based on these branches will start the wokflow
+      - master
+  workflow_dispatch: # allows you to run this workflows manually from the Actions tab
+
+# for more details see (GitHub tutorial)[https://docs.github.com/en/actions/learn-github-actions/environment-variables]
+env:
+  ENV_VARIABLE: Hello World
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    Explore-Environment-Variables:
+      runs-on: ubuntu-latest
+      steps:
+        - run: |
+            echo "The content of the environment variable is: $ENV_VARIABLE"
+            echo "The job has been completed 🎉 !"
