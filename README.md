@@ -1,2 +1,3 @@
-# CI Examples
-This repo contains a few examples of CI using GitHub Actions.
+# Automation Examples
+
+This repo contains automation examples just used as a playground.
