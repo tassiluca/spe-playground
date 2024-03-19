@@ -1,6 +1,6 @@
-## Git
+# Git
 
-### Tagging
+## Tags
 
 [[Ref](https://git-scm.com/book/en/v2/Git-Basics-Tagging)]
 
@@ -28,17 +28,17 @@
   - `git push --tags` to push all tags (annotated and lightweight)
   - `git push --follow-tags` to push commits and annotated tags
 
-### Signing
+## Sign
 
 - `git config --global tag.gpgSign`
 - [https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [https://gist.github.com/paolocarrasco/18ca8fe6e63490ae1be23e84a7039374?permalink_comment_id=3767413#gistcomment-3767413](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 
-### Stash
+## Stash
 
 [[Ref](https://www.atlassian.com/git/tutorials/saving-changes/git-stash)]
 
-### Git rebase
+## Rebase
 
 **Goal**: replies commits on top of the new base.
 
@@ -110,7 +110,7 @@ gitGraph
   commit id: "d8d174a"
 ```
 
-#### Advanced
+### Advanced
 
 ```
 * 0420b89 (HEAD -> client) feat: add index.html
@@ -182,3 +182,55 @@ gitGraph
 :warning: do not rebase commits that have been pushed to a remote branch that others are using.
 
 [[Ref](https://www.atlassian.com/git/tutorials/merging-vs-rebasing#the-golden-rule-of-rebasing)]
+
+## Squash
+
+## Bisection
+
+```plaintext
+* 9ce5358 (HEAD -> master, origin/master) refactor: clean structure
+* 5264c8f more on git advanced
+* a2f0a04 docs: add tags and sign
+* ece0458 chore: improve readme
+* 79900c2 added run
+* e399d30 configure env variable with secret
+* 99c627f add script for testing env variables with ci
+* 9b1a2e8 (bug) refactor: introduce bug
+* 060f2fe feat: add demo script
+| * 88bc425 (origin/boh) boh
+| * ba9b498 more on git advanced
+| * 85d14f7 docs: add tags and sign
+| * a3b0345 chore: improve readme
+| | * 08b85b7 (origin/spe-lectures, spe-lectures) clean
+| |/  
+| * c52da85 (tag: v0.0.1) added run
+| * 691a209 configure env variable with secret
+| * b82db6c add script for testing env variables with ci
+|/  
+* 6b00722 (tag: just-a-label) add DS_Store to gitignore
+* f4d975f fixed typo
+* fe78a64 added example of uml schemas with mermaid
+* 08342d4 from prof
+* 0937b7d added matrix example
+* e9d0282 added readme
+* 13d86b0 default > basic
+* 7844461 pull-request > pull_request
+* 024d072 fixed typo
+* f0d8189 fixed bug
+* c627d33 added basic ci
+* fd89689 fixed
+* ac2a17e first commit
+(END)
+```
+
+`9b1a2e8` introduces a bug:
+
+- `git bisect start`
+- `git bisect bad`
+- `git bisect good ac2a17e` (a commit with a functioning code)
+- bisection will use the binary search algorithm to find the commit that introduced the bug asking you, for each commit, if it's `good` or `bad`.
+  - you have to test the code at each step
+  - type `git bisect good` or `git bisect bad` until the bisection is complete
+- at the end git will tell you the commit that introduced the bug
+
+**A test is useful to automate the process (of course, when we have a bug 🐛 the first things we do is write a failing test, isn't it 😉)!**
