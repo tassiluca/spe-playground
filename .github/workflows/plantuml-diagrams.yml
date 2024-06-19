@@ -1,0 +1,20 @@
+name: Embed PlantUML Diagrams SVGs in markdown files
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  Embed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Print ruby version
+        run: ruby --version
+      - name: Setup plantuml
+        run: sudo apt install -y plantuml
+      - name: Embed PlantUML Diagrams
+        run: |
+          ruby .github/scripts/plant-in-md.rb .
