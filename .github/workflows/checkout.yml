@@ -20,6 +20,7 @@ jobs:
       - name: Display the github workspace
         run: |
           echo "The github workspace is: ${{ github.workspace }}"
+          echo $GITHUB_WORKSPACE
       - name: Checkout the repository
         uses: actions/checkout@v4
       - name: List files in the repository
