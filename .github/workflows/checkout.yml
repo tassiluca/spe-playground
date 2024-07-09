@@ -1,0 +1,21 @@
+name: An action to experiment with the checkout action
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  Checkout:
+    runs-on: windows-latest
+    steps:
+      - name: Display the github workspace
+        run: |
+          echo "The github workspace is: $GITHUB_WORKSPACE"
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - name: List files in the repository
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Files in the repository: $(ls)"

@@ -20,12 +20,12 @@ jobs:
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
-        jvm_version: [8, 11, 15, 16] # Arbitrarily-made and arbitrarily-valued variables
+        jvm_version: [11, 17, 21] # Arbitrarily-made and arbitrarily-valued variables
         ruby_version: [2.7, 3.0]
-        python_version: [3.7, 3.9.7]
+        python_version: [3.7, 3.12]
     runs-on: ${{ matrix.os }}-latest # The string is computed interpolating a variable value
     steps:
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.jvm_version }} # "${{ }}" contents are interpreted by the github actions runner
