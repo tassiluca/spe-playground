@@ -31,6 +31,5 @@ jobs:
         if: matrix.os == 'windows'
         run: |
           echo "Moving files to C driver"
-          mkdir -p /c/test-ci
-          mv * /c/test-ci/
-          ls -alh /c/test-ci
+          mv ${GITHUB_WORKSPACE} /c/
+          ls -alh /c/
