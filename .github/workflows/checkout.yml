@@ -6,16 +6,29 @@ on:
       - master
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   Checkout:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [windows, macos, ubuntu]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Display the github workspace
         run: |
-          echo The github workspace is: ${{ github.workspace }}
+          echo "The github workspace is: ${{ github.workspace }}"
       - name: Checkout the repository
         uses: actions/checkout@v4
       - name: List files in the repository
         run: |
           echo "Current directory: $(pwd)"
           echo "Files in the repository: $(ls)"
+      - name: Move files to C driver if on windows
+        if: matrix.os == 'windows'
+        run: |
+          echo "Moving files to C driver"
+          mv * /c/
+          ls -alh /c/
