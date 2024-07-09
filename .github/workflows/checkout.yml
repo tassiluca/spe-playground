@@ -30,5 +30,6 @@ jobs:
         if: matrix.os == 'windows'
         run: |
           echo "Moving files to C driver"
-          mv * /c/
-          ls -alh /c/
+          mkdir -p /c/test-ci
+          mv * /c/test-ci/
+          ls -alh /c/test-ci
