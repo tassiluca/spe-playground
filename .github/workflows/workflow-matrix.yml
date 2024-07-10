@@ -41,3 +41,12 @@ jobs:
         run: ruby --version
       - shell: bash
         run: python --version
+
+  Success:
+    needs: Build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "The build was successful 🎉 !"
+          echo "The job has been completed 🎉 !"

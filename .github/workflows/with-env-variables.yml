@@ -1,4 +1,4 @@
-name: with-env-variables
+name: With environment variables
 
 on: # Events that trigger the workflow
   push:

@@ -1,4 +1,4 @@
-name: An action to experiment with the checkout action
+name: Experiment with the checkout action
 
 on:
   push:
