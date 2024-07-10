@@ -18,3 +18,16 @@ jobs:
       - name: Embed PlantUML Diagrams
         run: |
           ruby .github/scripts/plant-in-md.rb .
+
+  Success:
+    runs-on: ubuntu-22.04
+    needs:
+      - Embed
+    if: >-
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
+    steps:
+      - name: Verify that there were no failures
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
