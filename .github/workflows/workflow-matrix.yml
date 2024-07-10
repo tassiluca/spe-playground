@@ -44,7 +44,11 @@ jobs:
 
   Success:
     needs: Build
-    if: always()
+    if: >-
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
     runs-on: ubuntu-latest
     steps:
       - run: |
