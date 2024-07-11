@@ -1,0 +1,23 @@
+name: A child workflow
+
+on:
+  workflow_call: 
+
+jobs:
+  First-Child:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "A **first** child job 👶🏻"
+          echo "Simulating a task taking some time..."
+          sleep 8
+      - run: echo "First child job completed 🎉"
+
+  Second-Child:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "A **second** child job 👶🏻"
+          echo "Simulating a task taking some time..."
+          sleep 5
+      - run: echo "Second child job completed 🎉"

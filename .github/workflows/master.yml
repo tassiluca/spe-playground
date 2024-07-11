@@ -1,0 +1,39 @@
+name: A master workflow with child workflows that should spawn in parallel after the simple job is done 🚀
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  Simple:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "A simple job 😊"
+
+  First-Child:
+    needs: Simple
+    uses: ./.github/workflows/child1.yml
+    
+  Another-Child:
+    needs: Simple
+    uses: ./.github/workflows/child2.yml
+
+  First-Inline-Child:
+    needs: Simple
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "A **first inline** child job 👶🏻"
+          echo "Simulating a task taking some time..."
+          sleep 8
+      - run: echo "First inline child job completed 🎉"
+
+  Second-Inline-Child:
+    needs: Simple
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "A **second inline** child job 👶🏻"
+          echo "Simulating a task taking some time..."
+          sleep 5
+      - run: echo "Second inline child job completed 🎉"
