@@ -1,6 +1,7 @@
 # This is a test using mermaid.js
 
 ```mermaid
+@startuml ducks
 classDiagram
     Animal <|-- Duck
     Animal <|-- Fish
@@ -25,9 +26,11 @@ classDiagram
         +bool is_wild
         +run()
     }
+@enduml
 ```
 
 ```mermaid
+@startuml mindmap
 mindmap
   root((mindmap))
     Origins
@@ -45,4 +48,5 @@ mindmap
     Tools
       Pen and paper
       Mermaid
+@enduml
 ```
