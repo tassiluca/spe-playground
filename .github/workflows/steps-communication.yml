@@ -1,0 +1,16 @@
+name: Exploring step communication
+
+on:
+  push:
+
+jobs:
+  Step-Communication:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Find repo name
+        id: repo_name
+        run: echo "repo_name=${GITHUB_REPOSITORY##*/}" >> $GITHUB_OUTPUT
+      - name: Accessing and printing repo name
+        run: echo "The repository name is ${{ steps.repo_name.outputs.repo_name }}"
