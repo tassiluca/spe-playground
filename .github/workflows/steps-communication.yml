@@ -6,7 +6,15 @@ on:
 jobs:
   Step-Communication:
     runs-on: ubuntu-latest
+    concurrency:
+      group: build-${{ github.workflow }}-${{ github.event.number || github.ref }}
+      cancel-in-progress: true
     steps:
+      - name: Print info
+        run: |
+          echo "GitHub workflow ${{ github.workflow }}"
+          echo "GitHub event number ${{ github.event.number }}"
+          echo "GitHub ref ${{ github.ref }}"
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Find repo name
@@ -14,3 +22,7 @@ jobs:
         run: echo "repo_name=${GITHUB_REPOSITORY##*/}" >> $GITHUB_OUTPUT
       - name: Accessing and printing repo name
         run: echo "The repository name is ${{ steps.repo_name.outputs.repo_name }}"
+      - name: Long lasting task
+        run: |
+          echo "Simulating a task taking some time..."
+          sleep 5
