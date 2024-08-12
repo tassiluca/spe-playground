@@ -50,6 +50,7 @@ jobs:
         run: ruby --version
       - shell: bash
         run: python --version
+      - run: false
 
   Success:
     runs-on: ubuntu-22.04
