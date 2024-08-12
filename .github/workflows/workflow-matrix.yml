@@ -50,7 +50,6 @@ jobs:
         run: ruby --version
       - shell: bash
         run: python --version
-      - run: false
 
   Success:
     runs-on: ubuntu-22.04
@@ -61,7 +60,6 @@ jobs:
         contains(join(needs.*.result, ','), 'failure')
         || (
           !contains(join(needs.*.result, ','), 'cancelled') 
-          && !contains(join(needs.*.result, ','), 'skipped')
         )
       )
     steps:
