@@ -1,4 +1,4 @@
-name: Experiment with the checkout action
+name: Checkout on different drive on windows
 
 on:
   push:
