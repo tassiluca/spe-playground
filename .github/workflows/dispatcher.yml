@@ -1,0 +1,29 @@
+name: Dispatcher for workflow-matrix
+
+on:
+  push:
+    tags: '*'
+    branches-ignore:
+      - 'autodelivery**'
+      - 'bump-**'
+      - 'renovate/**'
+    paths-ignore: 
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  pull_request:
+    branches: 
+      - master
+
+jobs:
+  Dispatcher:
+    runs-on: ubuntu-latest
+    if: >- # Prevents running the workflow twice on PR made by a branch of the same repository
+      github.event_name != 'pull_request'
+      || github.event.pull_request.head.repo.full_name != github.repository
+    steps:
+      - run: 'true'
+  CI-CD:
+    needs:
+      - Dispatcher
+    uses: ./.github/workflows/workflow-matrix.yml

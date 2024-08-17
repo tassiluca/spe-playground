@@ -1,18 +1,6 @@
 name: A Matrix Workflow
 on:
-  push:
-    tags: '*'
-    branches-ignore:
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-    paths-ignore: 
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-  pull_request:
-    branches: 
-      - master
+  workflow_call: 
   workflow_dispatch:
 
 jobs:
