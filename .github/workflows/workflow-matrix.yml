@@ -61,6 +61,7 @@ jobs:
         contains(join(needs.*.result, ','), 'failure')
         || (
           !contains(join(needs.*.result, ','), 'cancelled') 
+          && !contains(join(needs.*.result, ','), 'skipped')
         )
       )
     steps:
