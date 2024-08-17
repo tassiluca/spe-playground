@@ -1,22 +1,19 @@
 name: A Matrix Workflow
 on:
-  push:
-    tags: '*'
-    branches-ignore:
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-    paths-ignore: 
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-  pull_request:
-    branches: 
-      - master
+  workflow_call: 
   workflow_dispatch:
 
 jobs:
+  Dispatcher:
+    runs-on: ubuntu-latest
+    if: >- # Prevents running the workflow twice on PR made by a branch of the same repository
+      github.event_name != 'pull_request'
+      || github.event.pull_request.head.repo.full_name != github.repository
+    steps:
+      - run: 'true'
+
   Build:
+    needs: Dispatcher
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
@@ -41,6 +38,7 @@ jobs:
         run: ruby --version
       - shell: bash
         run: python --version
+      - run: false
 
   Success:
     runs-on: ubuntu-22.04
@@ -49,7 +47,10 @@ jobs:
     if: >-
       always() && (
         contains(join(needs.*.result, ','), 'failure')
-        || !contains(join(needs.*.result, ','), 'cancelled')
+        || (
+          !contains(join(needs.*.result, ','), 'cancelled') 
+          && !contains(join(needs.*.result, ','), 'skipped')
+        )
       )
     steps:
       - name: Verify that there were no failures
