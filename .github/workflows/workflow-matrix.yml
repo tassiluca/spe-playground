@@ -4,16 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Dispatcher:
-    runs-on: ubuntu-latest
-    if: >- # Prevents running the workflow twice on PR made by a branch of the same repository
-      github.event_name != 'pull_request'
-      || github.event.pull_request.head.repo.full_name != github.repository
-    steps:
-      - run: 'true'
-
   Build:
-    needs: Dispatcher
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
@@ -38,7 +29,6 @@ jobs:
         run: ruby --version
       - shell: bash
         run: python --version
-      - run: false
 
   Success:
     runs-on: ubuntu-22.04

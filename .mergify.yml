@@ -7,15 +7,21 @@ pull_request_rules:
     actions:
       comment:
         message: >
-          👋 {{author}} your PR is conflicting and needs to be updated to be
-          merged 😉
-  - name: Automatic rebase when CI passes and approved
+          👋 @{{author}} your PR is conflicting and needs to be updated to be merged 😉
+  - name: Ping PR author when title does not follow conventional commits
+    description: Warn the pull request author when their PR title does not follow conventional commits
     conditions:
-      - or:
-        - check-success=success
-        - check-neutral=success
-        - check-skipped=success
+      - '-title ~= ^(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(?:(.+))?:'
+    actions:
+      comment:
+        message: >-
+          👋 @{{author}} your PR title does not follow conventional commits guidelines.
+          ⚠️ If squashed, the new commit won't be complaint with those conventions 
+          (please, refer to https://www.conventionalcommits.org/).
+  - name: Automatic merge when CI passes and approved (rebase by default)
+    conditions:
       - '#approved-reviews-by>=2'
+      - check-success~=.*Success
       - base=main
       - label=auto-rebase
       - '-draft'
@@ -26,7 +32,7 @@ pull_request_rules:
   - name: Automatic squash merge when CI passes and approved
     conditions:
       - '#approved-reviews-by>=2'
-      - check-success=success
+      - check-success~=.*Success
       - base=main
       - label=auto-squash
       - '-draft'
@@ -40,3 +46,10 @@ pull_request_rules:
     actions:
       delete_head_branch:
         force: false
+
+merge_protections:
+  - name: Make sure title follow conventional commits
+    if:
+      - base=main
+    success_conditions:
+      - title~=^(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(?:(.+))?:.*
