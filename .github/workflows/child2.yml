@@ -1,12 +1,26 @@
 name: A yet another child workflow
 
 on:
-  workflow_call: 
+  workflow_call:
+    inputs:
+      env_vars:
+        description: List of environment variables to set, in env=value format
+        required: false
+        type: string
 
 jobs:
   Another-Child:
     runs-on: ubuntu-latest
     steps:
+      - name: Set environment variables
+        if: ${{ inputs.env_vars }}
+        run: |
+          for i in "${{ inputs.env_vars }}"
+          do
+            printf "%s\n" $i >> $GITHUB_ENV
+          done
+      - run: |
+          echo ${{ inputs.env_vars }}
       - run: |
           echo "A **yet another** child job 👶🏻"
           echo "Simulating a task taking some time..."

@@ -17,6 +17,10 @@ jobs:
   Another-Child:
     needs: Simple
     uses: ./.github/workflows/child2.yml
+    with:
+      env_vars: |
+        ENV_VAR1=VALUE1
+        ENV_VAR2=VALUE2
 
   First-Inline-Child:
     needs: Simple
