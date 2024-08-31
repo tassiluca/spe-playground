@@ -28,3 +28,8 @@ jobs:
         - run: |
             echo "The content of the environment variable is: $ENV_VARIABLE"
             echo "The job has been completed 🎉 !"
+
+        - name: setting the env with $GITHUB_ENV
+          run: |
+            echo "ENV_VARIABLE=${{secrets.SAMPLE_TOKEN}}" >> $GITHUB_ENV
+            echo "The content of the environment variable is: $ENV_VARIABLE"
