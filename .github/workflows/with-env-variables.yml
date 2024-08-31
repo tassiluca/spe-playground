@@ -33,3 +33,12 @@ jobs:
           run: |
             echo "ENV_VARIABLE=${{secrets.SAMPLE_TOKEN}}" >> $GITHUB_ENV
             echo "The content of the environment variable is: $ENV_VARIABLE"
+
+        - name: initializing an env variable with a non-secret value
+          run: |
+            echo "ANOTHER_ENV=not a secret" >> $GITHUB_ENV
+            echo "The content of the environment variable is: $ANOTHER_ENV"
+
+        - name: accessing the env variable
+          run: |
+            echo "The content of the environment variable is: $ANOTHER_ENV"
