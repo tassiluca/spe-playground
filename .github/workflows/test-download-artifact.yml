@@ -18,4 +18,5 @@ jobs:
           commit: ${{ github.sha }}
           name: test-artifact
           workflow_conclusion: in_progress
+          path: ./
       - run: cat test.txt
