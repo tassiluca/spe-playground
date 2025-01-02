@@ -1,7 +1,7 @@
 name: Test upload artifact
 
 on:
-  push:
+  workflow_call: 
 
 jobs:
   Upload-Artifact:
@@ -21,7 +21,3 @@ jobs:
           name: test-artifact
           path: ./*.txt
           if-no-files-found: error
-
-  Call-Download:
-    needs: Upload-Artifact
-    uses: ./.github/workflows/test-download-artifact.yml

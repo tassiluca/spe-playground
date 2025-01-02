@@ -1,0 +1,12 @@
+name: Entrypoint for test upload and download artifacts
+
+on:
+  push:
+
+jobs:
+  Call-Upload:
+    uses: ./.github/workflows/test-upload-artifact.yml
+
+  Call-Download:
+    needs: Call-Upload
+    uses: ./.github/workflows/test-download-artifact.yml
