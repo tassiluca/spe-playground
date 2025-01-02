@@ -13,5 +13,5 @@ jobs:
         uses: dawidd6/action-download-artifact@v7
         with:
           workflow: test-upload-artifact.yml
-          name: test-artifact-${{ github.sha}}
+          name: "test-artifact-${{ github.sha}}"
       - run: cat test.txt
