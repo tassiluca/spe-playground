@@ -17,6 +17,6 @@ jobs:
           workflow_search: true
           commit: ${{ github.sha }}
           name: test-artifact
-          #workflow_conclusion: ""
+          workflow_conclusion: in_progress # "" should work as well
           path: ./
       - run: cat test.txt
