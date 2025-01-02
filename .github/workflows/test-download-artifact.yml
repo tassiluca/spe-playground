@@ -9,9 +9,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - run: |
+          echo "Github sha: ${{ github.sha }}"
       - name: Download artifact from another workflow
         uses: dawidd6/action-download-artifact@v7
         with:
           workflow: test-upload-artifact.yml
-          name: "test-artifact-${{ github.sha}}"
       - run: cat test.txt

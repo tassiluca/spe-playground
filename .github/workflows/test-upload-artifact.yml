@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Create a file
-        run: echo "This is a test file" > test.txt
+        run: echo "This is a test file - ${{ github.sha }}" > test.txt
       - name: Print workflow name
         run: echo "GitHub workflow ${{ github.workflow_ref }}"
       - name: Print workflow sha
