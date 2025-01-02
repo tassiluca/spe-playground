@@ -15,4 +15,5 @@ jobs:
         uses: dawidd6/action-download-artifact@v7
         with:
           workflow: test-upload-artifact.yml
+          name: test-artifact
       - run: cat test.txt

@@ -18,7 +18,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4.5.0
         with:
-          name: "test-artifact-${{ github.sha}}"
+          name: "test-artifact"
           path: ./test.txt
           if-no-files-found: error
 
