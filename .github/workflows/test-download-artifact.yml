@@ -14,9 +14,9 @@ jobs:
       - name: Download artifact from another workflow
         uses: dawidd6/action-download-artifact@v7
         with:
-          workflow_search: true
+          workflow: test-upload-download.yml
           commit: ${{ github.sha }}
           name: test-artifact
-          workflow_conclusion: in_progress # "" should work as well
+          workflow_conclusion: in_progress
           path: ./
       - run: cat test.txt
