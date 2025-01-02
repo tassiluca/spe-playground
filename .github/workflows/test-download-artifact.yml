@@ -1,0 +1,17 @@
+name: Test download artifact
+
+on:
+  workflow_call: 
+
+jobs:
+  Download-Artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Download artifact from another workflow
+        uses: dawidd6/action-download-artifact@v7
+        with:
+          workflow: test-upload-artifact.yml
+          name: test-artifact
+      - run: cat test.txt
