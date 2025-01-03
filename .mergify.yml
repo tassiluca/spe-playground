@@ -20,8 +20,8 @@ pull_request_rules:
           (please, refer to https://www.conventionalcommits.org/).
   - name: Automatic merge when CI passes and approved
     conditions:
-#      - check-success~=.*Success
-      - base=main
+      - check-success~=.*Success
+      - base=master
       - label=auto-rebase
       - '-draft'
       - '-conflict'
@@ -31,8 +31,8 @@ pull_request_rules:
         merge_bot_account: tassiluca
   - name: Automatic squash merge when CI passes and approved
     conditions:
-#      - check-success~=.*Success
-      - base=main
+      - check-success~=.*Success
+      - base=master
       - label=auto-squash
       - '-draft'
       - '-conflict'
