@@ -233,4 +233,4 @@ gitGraph
   - type `git bisect good` or `git bisect bad` until the bisection is complete
 - at the end git will tell you the commit that introduced the bug
 
-**A test is useful to automate the process (of course, when we have a bug 🐛 the first things we do is write a failing test, isn't it 😉)!**
+**A test is useful to automate the process (of course, when we have a bug 🐛 the first things we do is write a failing regression test, isn't it 😉)!**
