@@ -28,7 +28,7 @@ pull_request_rules:
     actions:
       merge:
         method: rebase
-        merge_bot_account: tassiluca
+        merge_bot_account: position-pal-mate
   - name: Automatic squash merge when CI passes and approved
     conditions:
       - check-success~=.*Success
@@ -39,7 +39,7 @@ pull_request_rules:
     actions:
       merge:
         method: squash
-        merge_bot_account: tassiluca
+        merge_bot_account: position-pal-mate
   - name: Delete head branch after merge but not if other PRs depend on it
     conditions:
       - merged
