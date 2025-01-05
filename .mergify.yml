@@ -18,7 +18,7 @@ pull_request_rules:
           👋 @{{author}} your PR title does not follow conventional commits guidelines.
           ⚠️ If squashed, the new commit won't be complaint with those conventions 
           (please, refer to https://www.conventionalcommits.org/).
-  - name: Automatic merge when CI passes and approved
+  - name: Automatic rebase merge when CI passes and approved
     conditions:
       - check-success~=.*Success
       - base=master
@@ -28,6 +28,17 @@ pull_request_rules:
     actions:
       merge:
         method: rebase
+        merge_bot_account: position-pal-mate
+  - name: Automatic merge when CI passes and approved
+    conditions:
+      - check-success~=.*Success
+      - base=master
+      - label=auto-merge
+      - '-draft'
+      - '-conflict'
+    actions:
+      merge:
+        method: merge
         merge_bot_account: position-pal-mate
   - name: Automatic squash merge when CI passes and approved
     conditions:
