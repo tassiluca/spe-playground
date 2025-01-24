@@ -12,7 +12,7 @@ jobs:
       - run: |
           echo "Github sha: ${{ github.sha }}"
       - name: Download artifact from another workflow
-        uses: dawidd6/action-download-artifact@v7
+        uses: dawidd6/action-download-artifact@v8
         with:
           workflow: test-upload-download.yml
           commit: ${{ github.sha }}
