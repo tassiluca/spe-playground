@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Create a file
         run: echo "This is a test file - ${{ github.sha }}" > test.txt
       - name: Print workflow name
