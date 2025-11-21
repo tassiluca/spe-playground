@@ -16,7 +16,7 @@ jobs:
           echo "GitHub event number ${{ github.event.number }}"
           echo "GitHub ref ${{ github.ref }}"
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Find repo name
         id: repo_name
         run: echo "repo_name=${GITHUB_REPOSITORY##*/}" >> $GITHUB_OUTPUT
