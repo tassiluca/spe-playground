@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - run: |
           echo "Github sha: ${{ github.sha }}"
       - name: Download artifact from another workflow
