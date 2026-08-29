@@ -13,7 +13,7 @@ jobs:
         python_version: [3.12]
     runs-on: ${{ matrix.os }}-latest # The string is computed interpolating a variable value
     steps:
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.jvm_version }} # "${{ }}" contents are interpreted by the github actions runner
